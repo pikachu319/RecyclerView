@@ -74,12 +74,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void dowload() {
-        pd = new ProgressDialog(MainActivity.this);
-        pd.setMessage("資料下載中...");
-        pd.setCancelable(false);
-        pd.show();
+        if (dbHper.RecCount() == 0) {
+            pd = new ProgressDialog(MainActivity.this);
+            pd.setMessage("資料下載中...");
+            pd.setCancelable(false);
+            pd.show();
 
-        handler.postDelayed(updateTimer, 2000); // 延遲
+            handler.postDelayed(updateTimer, 2000); // 延遲
+        } else {
+            Toast.makeText(getApplicationContext(), "歡迎回來", Toast.LENGTH_LONG).show();
+        }
     }
 
     private Runnable updateTimer = new Runnable() {
